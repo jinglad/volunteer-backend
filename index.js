@@ -30,43 +30,43 @@ client.connect(err => {
                 console.log(result.insertedCount);
                 res.send(result.insertedCount);
             })
-    })
+    }),
 
-    app.get('/events', (req, res) => {
-        eventsCollection.find({})
-            .toArray((err, documents) => {
-                res.send(documents);
-            })
-    })
+        app.get('/events', (req, res) => {
+            eventsCollection.find({})
+                .toArray((err, documents) => {
+                    res.send(documents);
+                })
+        }),
 
-    app.post('/addVolunteer', (req, res) => {
-        let volunteer = req.body;
-        volunteersCollection.insertOne(volunteer)
-            .then(result => {
-                res.send(result.insertedCount > 0);
-            })
-    })
+        app.post('/addVolunteer', (req, res) => {
+            let volunteer = req.body;
+            volunteersCollection.insertOne(volunteer)
+                .then(result => {
+                    res.send(result.insertedCount > 0);
+                })
+        }),
 
-    app.get('/registeredEvents', (req, res) => {
-        volunteersCollection.find({ email: req.query.email })
-            .toArray((err, documents) => {
-                res.send(documents);
-            })
-    })
+        app.get('/registeredEvents', (req, res) => {
+            volunteersCollection.find({ email: req.query.email })
+                .toArray((err, documents) => {
+                    res.send(documents);
+                })
+        }),
 
-    app.get('/volunteers', (req, res) => {
-        volunteersCollection.find({})
-            .toArray((err, documents) => {
-                res.send(documents);
-            })
-    })
+        app.get('/volunteers', (req, res) => {
+            volunteersCollection.find({})
+                .toArray((err, documents) => {
+                    res.send(documents);
+                })
+        }),
 
-    app.delete('/delete/:id', (req, res) => {
-        volunteersCollection.deleteOne({ _id: ObjectId(req.params.id) })
-            .then(result => {
-                res.send(result.deletedCount > 0);
-            })
-    })
+        app.delete('/delete/:id', (req, res) => {
+            volunteersCollection.deleteOne({ _id: ObjectId(req.params.id) })
+                .then(result => {
+                    res.send(result.deletedCount > 0);
+                })
+        })
 });
 
 let PORT = process.env.PORT || 5000;
